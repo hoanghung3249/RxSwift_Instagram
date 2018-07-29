@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4531A4D6210C096500D2E9A0 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */; };
+		4531A4DD210C0E8800D2E9A0 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */; };
+		4531A4E1210C0EFF00D2E9A0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */; };
+		4531A4E4210C14CB00D2E9A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4E3210C14CB00D2E9A0 /* Constants.swift */; };
+		4531A4E7210C15B900D2E9A0 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4E6210C15B900D2E9A0 /* Reusable.swift */; };
+		4531A4E9210C4FD100D2E9A0 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4E8210C4FD100D2E9A0 /* RegisterViewModel.swift */; };
+		4531A4ED210C524400D2E9A0 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4EC210C524400D2E9A0 /* FirebaseService.swift */; };
+		4531A4F1210C997300D2E9A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4F0210C997300D2E9A0 /* User.swift */; };
 		45448E8D210B4C9B0011DED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45448E8C210B4C9B0011DED0 /* AppDelegate.swift */; };
 		45448E8F210B4C9B0011DED0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45448E8E210B4C9B0011DED0 /* SignInViewController.swift */; };
 		45448E92210B4C9B0011DED0 /* Authen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45448E90210B4C9B0011DED0 /* Authen.storyboard */; };
@@ -24,6 +32,14 @@
 
 /* Begin PBXFileReference section */
 		43EA38942AB18AFF8FA855FD /* Pods-RxSwift_Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift_Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwift_Instagram/Pods-RxSwift_Instagram.debug.xcconfig"; sourceTree = "<group>"; };
+		4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4531A4E3210C14CB00D2E9A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4531A4E6210C15B900D2E9A0 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		4531A4E8210C4FD100D2E9A0 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		4531A4EC210C524400D2E9A0 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		4531A4F0210C997300D2E9A0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45448E89210B4C9A0011DED0 /* RxSwift_Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwift_Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45448E8C210B4C9B0011DED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45448E8E210B4C9B0011DED0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +79,127 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4531A4D3210C094500D2E9A0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4DE210C0EDB00D2E9A0 /* RegisterViewModel */,
+				4531A4D4210C094D00D2E9A0 /* SignInViewModel */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4531A4D4210C094D00D2E9A0 /* SignInViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */,
+			);
+			path = SignInViewModel;
+			sourceTree = "<group>";
+		};
+		4531A4D7210C0C6500D2E9A0 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4D8210C0C6C00D2E9A0 /* Storyboards */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		4531A4D8210C0C6C00D2E9A0 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4D9210C0C7300D2E9A0 /* Authen */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4531A4D9210C0C7300D2E9A0 /* Authen */ = {
+			isa = PBXGroup;
+			children = (
+				45448E90210B4C9B0011DED0 /* Authen.storyboard */,
+			);
+			path = Authen;
+			sourceTree = "<group>";
+		};
+		4531A4DA210C0E6900D2E9A0 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4DB210C0E7500D2E9A0 /* TransitionManager */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		4531A4DB210C0E7500D2E9A0 /* TransitionManager */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */,
+			);
+			path = TransitionManager;
+			sourceTree = "<group>";
+		};
+		4531A4DE210C0EDB00D2E9A0 /* RegisterViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4E8210C4FD100D2E9A0 /* RegisterViewModel.swift */,
+			);
+			path = RegisterViewModel;
+			sourceTree = "<group>";
+		};
+		4531A4DF210C0EEA00D2E9A0 /* RegisterVC */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */,
+			);
+			path = RegisterVC;
+			sourceTree = "<group>";
+		};
+		4531A4E2210C14B900D2E9A0 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4E3210C14CB00D2E9A0 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		4531A4E5210C15A700D2E9A0 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4E6210C15B900D2E9A0 /* Reusable.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		4531A4EA210C522F00D2E9A0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4EB210C523600D2E9A0 /* FirebaseService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4531A4EB210C523600D2E9A0 /* FirebaseService */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4EC210C524400D2E9A0 /* FirebaseService.swift */,
+			);
+			path = FirebaseService;
+			sourceTree = "<group>";
+		};
+		4531A4EE210C996300D2E9A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4EF210C996900D2E9A0 /* User */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4531A4EF210C996900D2E9A0 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				4531A4F0210C997300D2E9A0 /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		45448E80210B4C9A0011DED0 = {
 			isa = PBXGroup;
 			children = (
@@ -84,10 +221,14 @@
 		45448E8B210B4C9A0011DED0 /* RxSwift_Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				4531A4EE210C996300D2E9A0 /* Model */,
+				4531A4EA210C522F00D2E9A0 /* Services */,
+				4531A4DA210C0E6900D2E9A0 /* Libraries */,
+				4531A4D7210C0C6500D2E9A0 /* Resource */,
+				4531A4D3210C094500D2E9A0 /* ViewModel */,
 				45448EA9210B527E0011DED0 /* Configs */,
 				45448EA0210B505A0011DED0 /* ViewControllers */,
 				45448E8C210B4C9B0011DED0 /* AppDelegate.swift */,
-				45448E90210B4C9B0011DED0 /* Authen.storyboard */,
 				45448E93210B4C9C0011DED0 /* Assets.xcassets */,
 				45448E95210B4C9C0011DED0 /* LaunchScreen.storyboard */,
 				45448E9E210B4F990011DED0 /* GoogleService-Info.plist */,
@@ -118,6 +259,7 @@
 		45448EA4210B515B0011DED0 /* AuthenVC */ = {
 			isa = PBXGroup;
 			children = (
+				4531A4DF210C0EEA00D2E9A0 /* RegisterVC */,
 				45448EA5210B51640011DED0 /* SignInVC */,
 			);
 			path = AuthenVC;
@@ -142,6 +284,8 @@
 		45448EA9210B527E0011DED0 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				4531A4E5210C15A700D2E9A0 /* Reusable */,
+				4531A4E2210C14B900D2E9A0 /* Constants */,
 				45448EAA210B52840011DED0 /* Helper */,
 			);
 			path = Configs;
@@ -275,6 +419,7 @@
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -289,6 +434,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -323,11 +469,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4531A4E7210C15B900D2E9A0 /* Reusable.swift in Sources */,
 				45448EA8210B52360011DED0 /* TabBarViewController.swift in Sources */,
+				4531A4E4210C14CB00D2E9A0 /* Constants.swift in Sources */,
+				4531A4E1210C0EFF00D2E9A0 /* RegisterViewController.swift in Sources */,
+				4531A4ED210C524400D2E9A0 /* FirebaseService.swift in Sources */,
 				45448EB5210B5B290011DED0 /* UIExtensions.swift in Sources */,
 				45448E8F210B4C9B0011DED0 /* SignInViewController.swift in Sources */,
 				45448EB2210B546A0011DED0 /* Font.swift in Sources */,
+				4531A4F1210C997300D2E9A0 /* User.swift in Sources */,
+				4531A4D6210C096500D2E9A0 /* SignInViewModel.swift in Sources */,
+				4531A4E9210C4FD100D2E9A0 /* RegisterViewModel.swift in Sources */,
 				45448EAD210B52A50011DED0 /* ProgressView.swift in Sources */,
+				4531A4DD210C0E8800D2E9A0 /* TransitionManager.swift in Sources */,
 				45448E8D210B4C9B0011DED0 /* AppDelegate.swift in Sources */,
 				45448EA3210B50BF0011DED0 /* BaseViewController.swift in Sources */,
 			);

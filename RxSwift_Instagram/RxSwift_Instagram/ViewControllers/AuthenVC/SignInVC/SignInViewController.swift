@@ -18,14 +18,14 @@ class SignInViewController: BaseViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var btnLogIn: UIButton!
     @IBOutlet weak var btnRegister: UIButton!
-    
+    let signInViewModel = SignInViewModel()
     
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
+        bindData()
     }
     
     
@@ -43,6 +43,7 @@ class SignInViewController: BaseViewController {
         txtPassword.layer.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.1).cgColor
         
         btnLogIn.layer.cornerRadius = 5
+        btnRegister.layer.cornerRadius = 5
     }
     
     private func setupPastelView() {
@@ -67,6 +68,26 @@ class SignInViewController: BaseViewController {
         vwGradient.insertSubview(pastelView, at: 0)
     }
     
+    private func bindData() {
+        txtEmail.rx.text
+            .map{$0 ?? ""}
+            .bind(to: signInViewModel.emailText)
+            .disposed(by: disposeBag)
+        
+        txtPassword.rx.text
+            .map{$0 ?? ""}
+            .bind(to: signInViewModel.passwordText)
+            .disposed(by: disposeBag)
+        
+        signInViewModel.isValid.bind(to: btnLogIn.rx.isEnabled).disposed(by: disposeBag)
+        
+        btnRegister.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let strongSelf = self else { return }
+                let registerVC = Storyboard.authen.instantiateViewController(ofType: RegisterViewController.self)
+                strongSelf.pushTo(registerVC)
+            }).disposed(by: disposeBag)
+        
+    }
 
 }
-

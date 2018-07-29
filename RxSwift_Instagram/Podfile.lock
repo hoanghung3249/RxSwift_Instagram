@@ -50,6 +50,9 @@ PODS:
   - Pastel (0.4.0)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
+  - RxGesture (1.2.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
 
 DEPENDENCIES:
@@ -63,6 +66,7 @@ DEPENDENCIES:
   - ObjectMapper (~> 3.0.0)
   - Pastel
   - RxCocoa (~> 4.0)
+  - RxGesture
   - RxSwift (~> 4.0)
 
 SPEC REPOS:
@@ -84,6 +88,7 @@ SPEC REPOS:
     - ObjectMapper
     - Pastel
     - RxCocoa
+    - RxGesture
     - RxSwift
 
 SPEC CHECKSUMS:
@@ -104,8 +109,9 @@ SPEC CHECKSUMS:
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
   Pastel: 7fa5e26123b3dbe11f7ed255654bf37100b199a5
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
 
-PODFILE CHECKSUM: 0c553331be5843ac876112341db3c2929aad4105
+PODFILE CHECKSUM: 02d87f4ea4f392c4d0834ed0744b277f3ce79334
 
 COCOAPODS: 1.5.3
