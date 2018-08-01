@@ -43,7 +43,7 @@ struct FirebaseService: FirebaseMethod {
                     let imgName = UUID().uuidString
                     let ref = FirebaseRef.storage.child("/Avatar")
                     let refAvatar = ref.child(imgName)
-                    ref.putData(imgData, metadata: nil, completion: { (metaData, error) in
+                    refAvatar.putData(imgData, metadata: nil, completion: { (metaData, error) in
                         if metaData != nil {
                             observer.onNext(refAvatar)
                             observer.onCompleted()
