@@ -10,6 +10,8 @@ import Foundation
 import ObjectMapper
 
 struct UserModel: Mappable {
+    static let shared = UserModel()
+    
     var uid:String = ""
     var userName:String = ""
     var email:String = ""
@@ -19,6 +21,10 @@ struct UserModel: Mappable {
     
     
     init?(map: Map) {}
+    
+    init() {
+        
+    }
     
     mutating func mapping(map: Map) {
         uid         <- map["uid"]
@@ -33,6 +39,16 @@ struct UserModel: Mappable {
         self.uid = uid
         self.userName = userName
         self.email = email
+    }
+    
+    mutating func logOut() {
+        uid = ""
+        userName = ""
+        email = ""
+        avatarUrl = ""
+        gender = ""
+        phoneNumber = ""
+        HandleUserData.shared.removeUserData()
     }
     
     

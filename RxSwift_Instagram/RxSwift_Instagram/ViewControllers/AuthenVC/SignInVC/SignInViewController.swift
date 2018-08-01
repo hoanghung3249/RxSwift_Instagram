@@ -28,6 +28,12 @@ class SignInViewController: BaseViewController {
         bindData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let user = UserModel.shared
+        print(user.email)
+    }
+    
     
     //MARK: - Support functions
     

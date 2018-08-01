@@ -21,6 +21,7 @@ class RegisterViewController: BaseViewController {
     @IBOutlet weak var txtUserName: UITextField!
     @IBOutlet weak var btnRegister: UIButton!
     @IBOutlet weak var vwGradient: UIView!
+    
     let registerViewModel = RegisterViewModel()
     
     // MARK: - Life Cycle
@@ -78,9 +79,9 @@ class RegisterViewController: BaseViewController {
     private func bindData() {
         unowned let strongSelf = self
         
-        txtEmail.rx.text.map{$0 ?? ""}.bind(to: registerViewModel.emailText).disposed(by: disposeBag)
-        txtPassword.rx.text.map{$0 ?? ""}.bind(to: registerViewModel.passwordText).disposed(by: disposeBag)
-        txtUserName.rx.text.map{$0 ?? ""}.bind(to: registerViewModel.userNameText).disposed(by: disposeBag)
+        txtEmail.rx.text.asDriver().map{$0 ?? ""}.drive(registerViewModel.emailText).disposed(by: disposeBag)
+        txtPassword.rx.text.asDriver().map{$0 ?? ""}.drive(registerViewModel.passwordText).disposed(by: disposeBag)
+        txtUserName.rx.text.asDriver().map{$0 ?? ""}.drive(registerViewModel.userNameText).disposed(by: disposeBag)
         
         btnBack.rx.tap.subscribe(onNext: {
             strongSelf.dismiss(animated: true, completion: nil)
@@ -88,39 +89,27 @@ class RegisterViewController: BaseViewController {
         
         registerViewModel.isValid.bind(to: btnRegister.rx.isEnabled).disposed(by: disposeBag)
         
-        choosePhotoVariable.asObservable()
+        choosePhotoVariable.asDriver()
             .filter({$0 != nil})
-            .bind(to: imgAvatar.rx.image)
+            .drive(imgAvatar.rx.image)
             .disposed(by: disposeBag)
-        
-        choosePhotoVariable.asObservable()
-            .filter({$0 != nil})
-            .map({$0 ?? #imageLiteral(resourceName: "placeholder")})
-            .subscribe(onNext: { (image) in
-                strongSelf.registerViewModel.imgAvatar.value = image
-            }).disposed(by: disposeBag)
         
         imgAvatar.rx.tapGesture().when(.recognized)
             .subscribe(onNext: { (_) in
-                strongSelf.showImageSelectionAlert(sourceView: strongSelf.imgAvatar)
+                strongSelf.showImageSelectionAlert()
             }).disposed(by: disposeBag)
         
         btnRegister.rx.tap.asObservable().debounce(0.2, scheduler: MainScheduler.instance)
-            .flatMap({ _ in strongSelf.registerViewModel.login() })
-            .subscribe(onNext: { (isSuccess) in
-                print(isSuccess)
+            .do(onNext: { (_) in ProgressView.shared.show(strongSelf.view) })
+            .flatMap({ _ in strongSelf.registerViewModel.register(with: strongSelf.imgAvatar.image ?? #imageLiteral(resourceName: "placeholder")) })
+            .subscribe(onNext: { (userModel) in
+                ProgressView.shared.hide()
+                Parser().fetchDataSignIn(userModel)
+                strongSelf.dismiss(animated: true, completion: nil)
             }, onError: { (error) in
-                print(error.localizedDescription)
+                ProgressView.shared.hide()
+                strongSelf.showAlert(with: error.localizedDescription)
             }).disposed(by: disposeBag)
-        
-//        btnRegister.rx.tap
-//            .flatMap{ _ in strongSelf.registerViewModel.login() }
-//            .asObservable()
-//            .subscribe(onNext: { (isSuccess) in
-//                print(isSuccess)
-//            }, onError: { (error) in
-//                print(error.localizedDescription)
-//            }).disposed(by: disposeBag)
     }
 
 }

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         setup()
+        
+        _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { (count) in
+//                print("Resource count \()")
+            })
+        
+//        showVC()
         
         return true
     }
@@ -31,6 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    }
+    
+    private func getUserData() -> UserModel? {
+        let userModel = UserModel(JSON: HandleUserData.shared.getUserData()!)
+        return userModel
+    }
+    
+    private func showVC() {
+        if let userModel = getUserData() {
+            if !userModel.email.isEmpty {
+                print(userModel)
+            }
+        } else {
+            print("User need to login!")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -27,25 +27,28 @@ class RegisterViewModel {
         
     }
     
-    func login() -> Observable<Bool> {
+    func register(with avatar: UIImage) -> Observable<UserModel> {
         unowned let strongSelf = self
         return FirebaseService.shared.createUser(emailText.value, passwordText.value)
             .flatMap { (user) -> Observable<UserModel> in
                 return Observable.just(UserModel(uid: user.uid, userName: strongSelf.userNameText.value, email: strongSelf.emailText.value))
             }
-            .flatMap({ (userModel) -> Observable<Bool> in
-                return FirebaseService.shared.uploadAvatar(strongSelf.imgAvatar.value)
-                    .flatMap({ (ref) -> Observable<Bool> in
+            .flatMap({ (userModel) -> Observable<UserModel> in
+                return FirebaseService.shared.uploadAvatar(avatar)
+                    .flatMap({ (ref) -> Observable<UserModel> in
                         return FirebaseService.shared.getAvatarURL(ref)
                             .map({ (url) -> UserModel in
                                 var newUserModel = UserModel(uid: userModel.uid, userName: userModel.userName, email: userModel.email)
                                 newUserModel.avatarUrl = url
                                 return newUserModel
                             })
-                            .flatMap({ (newUserModel) -> Observable<Bool> in
+                            .flatMap({ (newUserModel) -> Observable<UserModel> in
                                 return FirebaseService.shared.saveUserToDBS(newUserModel)
                             })
                     })
+            })
+            .flatMap({ (userModel) -> Observable<UserModel> in
+                return FirebaseService.shared.login(with: userModel.email, strongSelf.passwordText.value)
             })
     }
     

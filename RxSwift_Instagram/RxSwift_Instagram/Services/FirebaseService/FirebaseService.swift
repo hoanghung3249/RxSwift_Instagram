@@ -12,9 +12,10 @@ import Firebase
 
 protocol FirebaseMethod {
     func createUser(_ email: String, _ password: String) -> Observable<User>
-    func saveUserToDBS(_ userModel: UserModel) -> Observable<Bool>
+    func saveUserToDBS(_ userModel: UserModel) -> Observable<UserModel>
     func uploadAvatar(_ image: UIImage) -> Observable<(StorageReference)>
     func getAvatarURL(_ ref: StorageReference) -> Observable<String>
+    func login(with email: String, _ password: String) -> Observable<UserModel>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -73,16 +74,33 @@ struct FirebaseService: FirebaseMethod {
         })
     }
     
-    func saveUserToDBS(_ userModel: UserModel) -> Observable<Bool> {
-        return Observable.deferred({ () -> Observable<Bool> in
+    func saveUserToDBS(_ userModel: UserModel) -> Observable<UserModel> {
+        return Observable.deferred({ () -> Observable<UserModel> in
             return Observable.create({ (observer) -> Disposable in
                 let ref = FirebaseRef.refUser.child(userModel.uid)
                 ref.setValue(userModel.toJSON(), withCompletionBlock: { (error, dataRef) in
                     if let error = error {
                         observer.onError(error)
                     } else {
-                        observer.onNext(true)
+                        observer.onNext(userModel)
                         observer.onCompleted()
+                    }
+                })
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func login(with email: String, _ password: String) -> Observable<UserModel> {
+        return Observable.deferred({ () -> Observable<UserModel> in
+            return Observable.create({ (observer) -> Disposable in
+                Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+                    if let user = user {
+                        let userModel = UserModel(uid: user.user.uid, userName: user.user.displayName ?? "", email: user.user.email ?? "")
+                        observer.onNext(userModel)
+                        observer.onCompleted()
+                    } else if let error = error {
+                        observer.onError(error)
                     }
                 })
                 return Disposables.create()

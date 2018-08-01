@@ -181,7 +181,7 @@
                                                         <rect key="frame" x="0.0" y="50" width="315" height="40"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -268,7 +268,7 @@
                         <outlet property="txtEmail" destination="eLF-iY-HRT" id="rQA-Am-9m7"/>
                         <outlet property="txtPassword" destination="wDC-12-OcJ" id="7gL-ou-1qF"/>
                         <outlet property="txtUserName" destination="umj-Sn-FD1" id="1bG-yY-8pP"/>
-                        <outlet property="vwGradient" destination="4Nv-o1-NT4" id="W4n-je-j31"/>
+                        <outlet property="vwGradient" destination="4Nv-o1-NT4" id="JF0-mk-Wfm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kGm-tG-JXV" userLabel="First Responder" sceneMemberID="firstResponder"/>

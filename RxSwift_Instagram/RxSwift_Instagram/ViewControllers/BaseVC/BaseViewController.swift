@@ -14,7 +14,7 @@ import RxGesture
 class BaseViewController: UIViewController {
     
     let disposeBag = DisposeBag()
-    let choosePhotoVariable = BehaviorRelay<UIImage?>(value: #imageLiteral(resourceName: "placeholder"))
+    let choosePhotoVariable = BehaviorRelay<UIImage?>(value: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
 }
 //Handle select image
 extension BaseViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func showImageSelectionAlert(sourceView: UIView?) {
+    func showImageSelectionAlert() {
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .alert)
 //        alert.modalPresentationStyle = .popover
 //        alert.popoverPresentationController?.sourceView = sourceView ?? self.view
@@ -43,8 +43,10 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
             picker.sourceType = UIImagePickerControllerSourceType.camera
             self?.present(picker, animated: true, completion: nil)
         }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(chooseImage)
         alert.addAction(takeFromCam)
+        alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

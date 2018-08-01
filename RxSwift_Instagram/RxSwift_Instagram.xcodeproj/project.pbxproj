@@ -27,6 +27,9 @@
 		45448EAF210B54200011DED0 /* Billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45448EAE210B54200011DED0 /* Billabong.ttf */; };
 		45448EB2210B546A0011DED0 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45448EB1210B546A0011DED0 /* Font.swift */; };
 		45448EB5210B5B290011DED0 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45448EB4210B5B290011DED0 /* UIExtensions.swift */; };
+		455FCFEA2111EF6600768B3F /* Pastel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FCFE92111EF6600768B3F /* Pastel.swift */; };
+		455FCFED2111F1E300768B3F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FCFEC2111F1E300768B3F /* Parser.swift */; };
+		455FCFEF2111F26000768B3F /* HandleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FCFEE2111F26000768B3F /* HandleUserData.swift */; };
 		656685670981DA768201F6BE /* Pods_RxSwift_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF4F3AF2AC02443A117CAF23 /* Pods_RxSwift_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		45448EAE210B54200011DED0 /* Billabong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Billabong.ttf; sourceTree = "<group>"; };
 		45448EB1210B546A0011DED0 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		45448EB4210B5B290011DED0 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		455FCFE92111EF6600768B3F /* Pastel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pastel.swift; sourceTree = "<group>"; };
+		455FCFEC2111F1E300768B3F /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		455FCFEE2111F26000768B3F /* HandleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleUserData.swift; sourceTree = "<group>"; };
 		A7A6C76AA02C3AF25B7D7DCC /* Pods-RxSwift_Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift_Instagram.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwift_Instagram/Pods-RxSwift_Instagram.release.xcconfig"; sourceTree = "<group>"; };
 		DF4F3AF2AC02443A117CAF23 /* Pods_RxSwift_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -221,6 +227,7 @@
 		45448E8B210B4C9A0011DED0 /* RxSwift_Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				455FCFE52111EF2E00768B3F /* Views */,
 				4531A4EE210C996300D2E9A0 /* Model */,
 				4531A4EA210C522F00D2E9A0 /* Services */,
 				4531A4DA210C0E6900D2E9A0 /* Libraries */,
@@ -294,6 +301,7 @@
 		45448EAA210B52840011DED0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				455FCFEB2111F1B700768B3F /* HandleUserData */,
 				45448EB3210B5B1B0011DED0 /* Extensions */,
 				45448EB0210B54600011DED0 /* Font */,
 				45448EAB210B52970011DED0 /* ProgressView */,
@@ -323,6 +331,31 @@
 				45448EB4210B5B290011DED0 /* UIExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		455FCFE52111EF2E00768B3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				455FCFE62111EF3400768B3F /* PastelView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		455FCFE62111EF3400768B3F /* PastelView */ = {
+			isa = PBXGroup;
+			children = (
+				455FCFE92111EF6600768B3F /* Pastel.swift */,
+			);
+			path = PastelView;
+			sourceTree = "<group>";
+		};
+		455FCFEB2111F1B700768B3F /* HandleUserData */ = {
+			isa = PBXGroup;
+			children = (
+				455FCFEC2111F1E300768B3F /* Parser.swift */,
+				455FCFEE2111F26000768B3F /* HandleUserData.swift */,
+			);
+			path = HandleUserData;
 			sourceTree = "<group>";
 		};
 		EF4A6F03C757FAB501E47653 /* Frameworks */ = {
@@ -469,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455FCFEA2111EF6600768B3F /* Pastel.swift in Sources */,
 				4531A4E7210C15B900D2E9A0 /* Reusable.swift in Sources */,
 				45448EA8210B52360011DED0 /* TabBarViewController.swift in Sources */,
 				4531A4E4210C14CB00D2E9A0 /* Constants.swift in Sources */,
@@ -482,7 +516,9 @@
 				4531A4E9210C4FD100D2E9A0 /* RegisterViewModel.swift in Sources */,
 				45448EAD210B52A50011DED0 /* ProgressView.swift in Sources */,
 				4531A4DD210C0E8800D2E9A0 /* TransitionManager.swift in Sources */,
+				455FCFEF2111F26000768B3F /* HandleUserData.swift in Sources */,
 				45448E8D210B4C9B0011DED0 /* AppDelegate.swift in Sources */,
+				455FCFED2111F1E300768B3F /* Parser.swift in Sources */,
 				45448EA3210B50BF0011DED0 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
