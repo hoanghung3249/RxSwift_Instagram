@@ -227,6 +227,7 @@
 		45448E8B210B4C9A0011DED0 /* RxSwift_Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				45448E8C210B4C9B0011DED0 /* AppDelegate.swift */,
 				455FCFE52111EF2E00768B3F /* Views */,
 				4531A4EE210C996300D2E9A0 /* Model */,
 				4531A4EA210C522F00D2E9A0 /* Services */,
@@ -235,7 +236,6 @@
 				4531A4D3210C094500D2E9A0 /* ViewModel */,
 				45448EA9210B527E0011DED0 /* Configs */,
 				45448EA0210B505A0011DED0 /* ViewControllers */,
-				45448E8C210B4C9B0011DED0 /* AppDelegate.swift */,
 				45448E93210B4C9C0011DED0 /* Assets.xcassets */,
 				45448E95210B4C9C0011DED0 /* LaunchScreen.storyboard */,
 				45448E9E210B4F990011DED0 /* GoogleService-Info.plist */,

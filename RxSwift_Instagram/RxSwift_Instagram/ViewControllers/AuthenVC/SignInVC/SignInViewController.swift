@@ -8,6 +8,7 @@
 
 import UIKit
 import Pastel
+import RxSwift
 
 class SignInViewController: BaseViewController {
     
@@ -75,19 +76,20 @@ class SignInViewController: BaseViewController {
     }
     
     private func bindData() {
-        txtEmail.rx.text
-            .map{$0 ?? ""}
-            .bind(to: signInViewModel.emailText)
+        
+        txtEmail.rx.text.asDriver()
+            .map({$0 ?? ""})
+            .drive(signInViewModel.emailText)
             .disposed(by: disposeBag)
         
-        txtPassword.rx.text
-            .map{$0 ?? ""}
-            .bind(to: signInViewModel.passwordText)
+        txtPassword.rx.text.asDriver()
+            .map({$0 ?? ""})
+            .drive(signInViewModel.passwordText)
             .disposed(by: disposeBag)
         
         signInViewModel.isValid.bind(to: btnLogIn.rx.isEnabled).disposed(by: disposeBag)
         
-        btnRegister.rx.tap
+        btnRegister.rx.tap.asObservable().debounce(0.1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 guard let strongSelf = self else { return }
                 let registerVC = Storyboard.authen.instantiateViewController(ofType: RegisterViewController.self)

@@ -27,6 +27,10 @@ class RegisterViewModel {
         
     }
     
+    func fetchUserData(_ userModel: UserModel) {
+        Parser().fetchDataSignIn(userModel)
+    }
+    
     func register(with avatar: UIImage) -> Observable<UserModel> {
         unowned let strongSelf = self
         return FirebaseService.shared.createUser(emailText.value, passwordText.value)
@@ -49,6 +53,10 @@ class RegisterViewModel {
             })
             .flatMap({ (userModel) -> Observable<UserModel> in
                 return FirebaseService.shared.login(with: userModel.email, strongSelf.passwordText.value)
+            })
+            .map({$0.uid})
+            .flatMap({ (uid) -> Observable<UserModel> in
+                return FirebaseService.shared.getUserModel(with: uid)
             })
     }
     

@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Resource count \()")
             })
         
-//        showVC()
+        showVC()
         
         return true
     }
@@ -42,7 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func getUserData() -> UserModel? {
-        let userModel = UserModel(JSON: HandleUserData.shared.getUserData()!)
+        guard let userData = HandleUserData.shared.getUserData() else { return nil }
+        let userModel = UserModel(JSON: userData)
         return userModel
     }
     

@@ -104,7 +104,7 @@ class RegisterViewController: BaseViewController {
             .flatMap({ _ in strongSelf.registerViewModel.register(with: strongSelf.imgAvatar.image ?? #imageLiteral(resourceName: "placeholder")) })
             .subscribe(onNext: { (userModel) in
                 ProgressView.shared.hide()
-                Parser().fetchDataSignIn(userModel)
+                strongSelf.registerViewModel.fetchUserData(userModel)
                 strongSelf.dismiss(animated: true, completion: nil)
             }, onError: { (error) in
                 ProgressView.shared.hide()

@@ -16,6 +16,7 @@ protocol FirebaseMethod {
     func uploadAvatar(_ image: UIImage) -> Observable<(StorageReference)>
     func getAvatarURL(_ ref: StorageReference) -> Observable<String>
     func login(with email: String, _ password: String) -> Observable<UserModel>
+    func getUserModel(with uid: String) -> Observable<UserModel>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -102,6 +103,22 @@ struct FirebaseService: FirebaseMethod {
                     } else if let error = error {
                         observer.onError(error)
                     }
+                })
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func getUserModel(with uid: String) -> Observable<UserModel> {
+        return Observable.deferred({ () -> Observable<UserModel> in
+            return Observable.create({ (observer) -> Disposable in
+                FirebaseRef.refUser.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let value = snapshot.value as? [String: Any], let userModel = UserModel(JSON: value) {
+                        observer.onNext(userModel)
+                        observer.onCompleted()
+                    }
+                }, withCancel: { (error) in
+                    observer.onError(error)
                 })
                 return Disposables.create()
             })
