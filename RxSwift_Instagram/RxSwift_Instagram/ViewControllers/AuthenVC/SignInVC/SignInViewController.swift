@@ -76,6 +76,7 @@ class SignInViewController: BaseViewController {
     }
     
     private func bindData() {
+        unowned let strongSelf = self
         
         txtEmail.rx.text.asDriver()
             .map({$0 ?? ""})
@@ -96,6 +97,16 @@ class SignInViewController: BaseViewController {
                 strongSelf.pushTo(registerVC)
             }).disposed(by: disposeBag)
         
+        btnLogIn.rx.tap.asObservable().debounce(0.1, scheduler: MainScheduler.instance)
+            .do(onNext: { _ in ProgressView.shared.show(strongSelf.view) })
+            .flatMap({ _ in strongSelf.signInViewModel.logIn() })
+            .subscribe(onNext: { (userModel) in
+                ProgressView.shared.hide()
+                strongSelf.signInViewModel.fetchUserData(userModel)
+            }, onError: { (error) in
+                ProgressView.shared.hide()
+                strongSelf.showAlert(with: error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
 
 }

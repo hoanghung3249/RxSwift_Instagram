@@ -23,4 +23,16 @@ class SignInViewModel {
         
     }
     
+    func fetchUserData(_ userModel: UserModel) {
+        Parser().fetchDataSignIn(userModel)
+    }
+    
+    func logIn() -> Observable<UserModel> {
+        return FirebaseService.shared.login(with: emailText.value, passwordText.value)
+            .map({$0.uid})
+            .flatMap({ (uid) -> Observable<UserModel> in
+                return FirebaseService.shared.getUserModel(with: uid)
+            })
+    }
+    
 }
