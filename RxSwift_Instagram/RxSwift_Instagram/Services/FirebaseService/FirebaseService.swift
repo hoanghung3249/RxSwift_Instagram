@@ -116,6 +116,8 @@ struct FirebaseService: FirebaseMethod {
                     if let value = snapshot.value as? [String: Any], let userModel = UserModel(JSON: value) {
                         observer.onNext(userModel)
                         observer.onCompleted()
+                    } else {
+                        observer.onError(ErrorResponse.noData)
                     }
                 }, withCancel: { (error) in
                     observer.onError(error)

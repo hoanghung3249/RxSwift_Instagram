@@ -11,6 +11,11 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+enum ErrorResponse: Error {
+    case noData
+    case canNotGetUser
+}
+
 struct Storyboard {
     static let authen = UIStoryboard(name: "Authen", bundle: nil)
 }
