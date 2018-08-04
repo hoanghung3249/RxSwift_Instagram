@@ -103,6 +103,8 @@ class SignInViewController: BaseViewController {
             .subscribe(onNext: { (userModel) in
                 ProgressView.shared.hide()
                 strongSelf.signInViewModel.fetchUserData(userModel)
+                let tabbarVC = TabBarViewController()
+                strongSelf.present(tabbarVC, animated: true, completion: nil)
             }, onError: { (error) in
                 ProgressView.shared.hide()
                 strongSelf.showAlert(with: error.localizedDescription)

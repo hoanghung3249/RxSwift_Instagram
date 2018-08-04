@@ -9,10 +9,15 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
-
+    
+    // MARK: - Outlets and Variables
+    
+    @IBOutlet weak var tbvPost: UITableView!
+    
+    // MARK: - Life Cycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
     }
 
 }

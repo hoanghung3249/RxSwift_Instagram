@@ -19,5 +19,6 @@ target 'RxSwift_Instagram' do
   pod 'Firebase/Storage'
   pod "Pastel"
   pod "RxGesture"
+  pod 'YPImagePicker'
   
 end
