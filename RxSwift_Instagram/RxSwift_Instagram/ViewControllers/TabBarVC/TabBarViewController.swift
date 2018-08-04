@@ -11,10 +11,25 @@ import RxSwift
 import RxCocoa
 
 class TabBarViewController: UITabBarController {
-
+    
+    // MARK: - Life Cycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupViewControllers()
+    }
+    
+    // MARK: - Support functions
+    
+    private func setupViewControllers() {
+        let homeVC = Storyboard.main.instantiateViewController(ofType: HomeViewController.self)
+        let navHomeVC = UINavigationController(rootViewController: homeVC)
+        navHomeVC.navigationBar.isTranslucent = false
+        navHomeVC.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Home"), selectedImage: #imageLiteral(resourceName: "Home_Selected"))
+        
+        
+        self.viewControllers = [navHomeVC]
     }
 
 }

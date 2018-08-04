@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Resource count \()")
             })
         
-        showVC()
+        showVC(window)
         
         return true
     }
@@ -47,14 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return userModel
     }
     
-    private func showVC() {
+    private func showVC(_ window: UIWindow?) {
         if let userModel = getUserData() {
             if !userModel.email.isEmpty {
-                print(userModel)
+                let tabbarVC = TabBarViewController()
+                window?.rootViewController = tabbarVC
             }
         } else {
-            print("User need to login!")
+            let loginVC = Storyboard.authen.instantiateViewController(ofType: SignInViewController.self)
+            window?.rootViewController = loginVC
         }
+        window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

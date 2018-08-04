@@ -18,6 +18,7 @@ enum ErrorResponse: Error {
 
 struct Storyboard {
     static let authen = UIStoryboard(name: "Authen", bundle: nil)
+    static let main = UIStoryboard(name: "Main", bundle: nil)
 }
 
 struct FirebaseRef {
