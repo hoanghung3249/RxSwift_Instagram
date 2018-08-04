@@ -36,7 +36,7 @@ class CameraViewController: BaseViewController {
     }
     
     private func setupUI() {
-        imgStatus.contentMode = .scaleAspectFit
+        imgStatus.contentMode = .scaleAspectFill
     }
     
     private func bindData() {
