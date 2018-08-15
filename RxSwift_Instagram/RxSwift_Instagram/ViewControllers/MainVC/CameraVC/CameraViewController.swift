@@ -75,6 +75,7 @@ class CameraViewController: BaseViewController {
             .flatMap({ _ in strongSelf.cameraViewModel.uploadStatus(with: strongSelf.imgStatus.image!, and: strongSelf.cameraViewModel.statusText.value) })
             .subscribe(onNext: { (isSuccess) in
                 ProgressView.shared.hide()
+                strongSelf.reloadUI()
                 strongSelf.tabBarController?.selectedIndex = 0
             }, onError: { (error) in
                 ProgressView.shared.hide()
@@ -93,6 +94,11 @@ class CameraViewController: BaseViewController {
             ypImgPicker.dismiss(animated: true, completion: nil)
         })
         present(ypImgPicker, animated: true, completion: nil)
+    }
+    
+    private func reloadUI() {
+        imgStatus.image = #imageLiteral(resourceName: "placeholder")
+        txvStatus.text = "What are you thinking?"
     }
 
 }

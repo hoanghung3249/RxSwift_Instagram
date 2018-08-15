@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45198A61212456FE00F3DB58 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45198A5F212456FE00F3DB58 /* HomeCell.swift */; };
+		45198A62212456FE00F3DB58 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45198A60212456FE00F3DB58 /* HomeCell.xib */; };
+		45198A6521245C8300F3DB58 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45198A6421245C8300F3DB58 /* Post.swift */; };
+		45198A6821245DC500F3DB58 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45198A6721245DC500F3DB58 /* HomeViewModel.swift */; };
 		4531A4D6210C096500D2E9A0 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */; };
 		4531A4DD210C0E8800D2E9A0 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */; };
 		4531A4E1210C0EFF00D2E9A0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */; };
@@ -44,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		43EA38942AB18AFF8FA855FD /* Pods-RxSwift_Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift_Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwift_Instagram/Pods-RxSwift_Instagram.debug.xcconfig"; sourceTree = "<group>"; };
+		45198A5F212456FE00F3DB58 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		45198A60212456FE00F3DB58 /* HomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
+		45198A6421245C8300F3DB58 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		45198A6721245DC500F3DB58 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -103,9 +111,35 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		45198A5E212456DE00F3DB58 /* HomeCell */ = {
+			isa = PBXGroup;
+			children = (
+				45198A5F212456FE00F3DB58 /* HomeCell.swift */,
+				45198A60212456FE00F3DB58 /* HomeCell.xib */,
+			);
+			path = HomeCell;
+			sourceTree = "<group>";
+		};
+		45198A6321245C7800F3DB58 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				45198A6421245C8300F3DB58 /* Post.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		45198A6621245DB500F3DB58 /* HomeViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				45198A6721245DC500F3DB58 /* HomeViewModel.swift */,
+			);
+			path = HomeViewModel;
+			sourceTree = "<group>";
+		};
 		4531A4D3210C094500D2E9A0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				45198A6621245DB500F3DB58 /* HomeViewModel */,
 				45BE3490211DD3160038F53C /* BaseViewModel */,
 				45F264CC2115DD0E00CA92B3 /* CameraViewModel */,
 				4531A4DE210C0EDB00D2E9A0 /* RegisterViewModel */,
@@ -214,6 +248,7 @@
 		4531A4EE210C996300D2E9A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				45198A6321245C7800F3DB58 /* Post */,
 				4531A4EF210C996900D2E9A0 /* User */,
 			);
 			path = Model;
@@ -367,6 +402,7 @@
 		455FCFE52111EF2E00768B3F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45198A5E212456DE00F3DB58 /* HomeCell */,
 				455FCFE62111EF3400768B3F /* PastelView */,
 			);
 			path = Views;
@@ -533,6 +569,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45198A62212456FE00F3DB58 /* HomeCell.xib in Resources */,
 				45448E97210B4C9C0011DED0 /* LaunchScreen.storyboard in Resources */,
 				45448E9F210B4F990011DED0 /* GoogleService-Info.plist in Resources */,
 				45448E94210B4C9C0011DED0 /* Assets.xcassets in Resources */,
@@ -623,6 +660,7 @@
 				45F264C02115483700CA92B3 /* HomeViewController.swift in Sources */,
 				45F264C8211549F100CA92B3 /* NotiViewController.swift in Sources */,
 				45F264CE2115DD2200CA92B3 /* CameraViewModel.swift in Sources */,
+				45198A61212456FE00F3DB58 /* HomeCell.swift in Sources */,
 				45BE3492211DD3270038F53C /* BaseViewModel.swift in Sources */,
 				45448EA8210B52360011DED0 /* TabBarViewController.swift in Sources */,
 				4531A4E4210C14CB00D2E9A0 /* Constants.swift in Sources */,
@@ -630,10 +668,12 @@
 				4531A4ED210C524400D2E9A0 /* FirebaseService.swift in Sources */,
 				45448EB5210B5B290011DED0 /* UIExtensions.swift in Sources */,
 				45448E8F210B4C9B0011DED0 /* SignInViewController.swift in Sources */,
+				45198A6821245DC500F3DB58 /* HomeViewModel.swift in Sources */,
 				45448EB2210B546A0011DED0 /* Font.swift in Sources */,
 				4531A4F1210C997300D2E9A0 /* User.swift in Sources */,
 				45F264C6211549CF00CA92B3 /* InfoViewController.swift in Sources */,
 				4531A4D6210C096500D2E9A0 /* SignInViewModel.swift in Sources */,
+				45198A6521245C8300F3DB58 /* Post.swift in Sources */,
 				4531A4E9210C4FD100D2E9A0 /* RegisterViewModel.swift in Sources */,
 				45448EAD210B52A50011DED0 /* ProgressView.swift in Sources */,
 				45F264C42115498F00CA92B3 /* SearchViewController.swift in Sources */,

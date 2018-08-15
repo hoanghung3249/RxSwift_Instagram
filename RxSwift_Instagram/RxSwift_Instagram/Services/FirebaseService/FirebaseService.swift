@@ -21,6 +21,7 @@ protocol FirebaseMethod {
     func uploadImage(_ image: UIImage) -> Observable<(StorageReference, String)>
     func uploadData(tableName: String, child: String?, value: [String: Any?]) -> Observable<Bool>
     func uploadDataUser(_ imgName: String, value: [String: Any?]) -> Observable<Bool>
+    func getListPost() -> Observable<[Post]>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -206,6 +207,29 @@ struct FirebaseService: FirebaseMethod {
                         observer.onNext(true)
                         observer.onCompleted()
                     }
+                })
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func getListPost() -> Observable<[Post]> {
+        return Observable.deferred({ () -> Observable<[Post]> in
+            return Observable.create({ (observer) -> Disposable in
+                FirebaseRef.refPost.observe(.childAdded, with: { (snapshot) in
+                    if let value = snapshot.value as? [String: Any] {
+                        var posts = [Post]()
+                        var post = Post(JSON: value)
+                        post?.id = snapshot.key
+                        let isLiked = post?.likes[(Auth.auth().currentUser?.uid)!] != nil
+                        post?.isLiked = isLiked
+                        
+                        posts.append(post!)
+                        observer.onNext(posts)
+                        observer.onCompleted()
+                    }
+                }, withCancel: { (error) in
+                    observer.onError(error)
                 })
                 return Disposables.create()
             })
