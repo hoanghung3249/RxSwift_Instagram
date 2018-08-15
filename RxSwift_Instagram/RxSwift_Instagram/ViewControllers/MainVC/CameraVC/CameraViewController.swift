@@ -46,25 +46,53 @@ class CameraViewController: BaseViewController {
         cameraViewModel.isValid.bind(to: btnShare.rx.isEnabled).disposed(by: disposeBag)
         cameraViewModel.imgStatus.asDriver().drive(imgStatus.rx.image).disposed(by: disposeBag)
         
+        txvStatus.rx.didBeginEditing.asObservable()
+            .subscribe(onNext: { (_) in
+                if strongSelf.txvStatus.text == "What are you thinking?" {
+                    strongSelf.txvStatus.text = ""
+                    strongSelf.txvStatus.textColor = UIColor.black
+                }
+            }).disposed(by: disposeBag)
+        
+        txvStatus.rx.didEndEditing.asObservable()
+            .subscribe(onNext: { (_) in
+                if strongSelf.txvStatus.text == "" {
+                    strongSelf.txvStatus.text = "What are you thinking?"
+                    strongSelf.txvStatus.textColor = UIColor.gray
+                }
+            }).disposed(by: disposeBag)
+        
         imgStatus.rx.tapGesture().when(.recognized)
             .subscribe(onNext: { (_) in
-                let ypImgPicker = YPImagePicker()
-                ypImgPicker.didFinishPicking(completion: { (items, _) in
-                    if let photo = items.singlePhoto {
-                        strongSelf.choosePhotoVariable.accept(photo.image)
-                    }
-                    ypImgPicker.dismiss(animated: true, completion: nil)
-                })
-                strongSelf.present(ypImgPicker, animated: true, completion: nil)
+                strongSelf.showImagePicker()
             }).disposed(by: disposeBag)
         
         choosePhotoVariable.asDriver().drive(imgStatus.rx.image).disposed(by: disposeBag)
         choosePhotoVariable.asObservable().bind(to: cameraViewModel.imgStatus).disposed(by: disposeBag)
         
-        btnShare.rx.tap.asObservable()
-            .subscribe(onNext: { (_) in
-                print("Share the photo")
+        btnShare.rx.tap.asObservable().debounce(0.2, scheduler: MainScheduler.instance)
+            .do(onNext: { _ in ProgressView.shared.show(strongSelf.view) })
+            .flatMap({ _ in strongSelf.cameraViewModel.uploadStatus(with: strongSelf.imgStatus.image!, and: strongSelf.cameraViewModel.statusText.value) })
+            .subscribe(onNext: { (isSuccess) in
+                ProgressView.shared.hide()
+                strongSelf.tabBarController?.selectedIndex = 0
+            }, onError: { (error) in
+                ProgressView.shared.hide()
+                strongSelf.showAlert(with: error.localizedDescription)
             }).disposed(by: disposeBag)
+        
+    }
+    
+    private func showImagePicker() {
+        let ypImgPicker = YPImagePicker()
+        ypImgPicker.didFinishPicking(completion: { [weak self] (items, _) in
+            guard let strongSelf = self else { return }
+            if let photo = items.singlePhoto {
+                strongSelf.choosePhotoVariable.accept(photo.image)
+            }
+            ypImgPicker.dismiss(animated: true, completion: nil)
+        })
+        present(ypImgPicker, animated: true, completion: nil)
     }
 
 }

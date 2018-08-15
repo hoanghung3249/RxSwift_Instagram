@@ -11,16 +11,41 @@ import RxSwift
 import Firebase
 
 protocol FirebaseMethod {
+    func getDataUser() -> Observable<UserModel?>
     func createUser(_ email: String, _ password: String) -> Observable<User>
     func saveUserToDBS(_ userModel: UserModel) -> Observable<UserModel>
     func uploadAvatar(_ image: UIImage) -> Observable<(StorageReference)>
     func getAvatarURL(_ ref: StorageReference) -> Observable<String>
     func login(with email: String, _ password: String) -> Observable<UserModel>
     func getUserModel(with uid: String) -> Observable<UserModel>
+    func uploadImage(_ image: UIImage) -> Observable<(StorageReference, String)>
+    func uploadData(tableName: String, child: String?, value: [String: Any?]) -> Observable<Bool>
+    func uploadDataUser(_ imgName: String, value: [String: Any?]) -> Observable<Bool>
 }
 
 struct FirebaseService: FirebaseMethod {
     static let shared = FirebaseService()
+    
+    func getDataUser() -> Observable<UserModel?> {
+        return Observable.deferred({ () -> Observable<UserModel?> in
+            return Observable.create({ (observer) -> Disposable in
+                if let currentUser = Auth.auth().currentUser {
+                    FirebaseRef.refUser.child(currentUser.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let value = snapshot.value as? [String: Any] {
+                            let userModel = UserModel(JSON: value)
+                            observer.onNext(userModel)
+                            observer.onCompleted()
+                        }
+                    }, withCancel: { (error) in
+                        observer.onError(error)
+                    })
+                } else {
+                    observer.onError(ErrorResponse.canNotGetUser)
+                }
+                return Disposables.create()
+            })
+        })
+    }
     
     func createUser(_ email: String, _ password: String) -> Observable<User> {
         return Observable.deferred { () -> Observable<User> in
@@ -121,6 +146,66 @@ struct FirebaseService: FirebaseMethod {
                     }
                 }, withCancel: { (error) in
                     observer.onError(error)
+                })
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func uploadImage(_ image: UIImage) -> Observable<(StorageReference, String)> {
+        return Observable.deferred({ () -> Observable<(StorageReference, String)> in
+            return Observable.create({ (observer) -> Disposable in
+                if let imageData = UIImageJPEGRepresentation(image, 0.1) {
+                    let imgName = UUID().uuidString
+                    let name = imgName + ".jpg"
+                    let ref = FirebaseRef.storage.child("/ImagePost")
+                    let refImgPost = ref.child(name)
+                    refImgPost.putData(imageData, metadata: nil, completion: { (metaData, error) in
+                        if metaData != nil {
+                            observer.onNext((refImgPost, imgName))
+                            observer.onCompleted()
+                        } else if let error = error {
+                            observer.onError(error)
+                        }
+                    })
+                } else {
+                    observer.onError(ErrorResponse.cannotGetImage)
+                }
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func uploadData(tableName: String, child: String?, value: [String: Any?]) -> Observable<Bool> {
+        return Observable.deferred({ () -> Observable<Bool> in
+            return Observable.create({ (observer) -> Disposable in
+                if let child = child {
+                    
+                } else {
+                    FirebaseRef.ref.child(tableName).childByAutoId().setValue(value, withCompletionBlock: { (error, data) in
+                        if let error = error {
+                            observer.onError(error)
+                        } else {
+                            observer.onNext(true)
+                            observer.onCompleted()
+                        }
+                    })
+                }
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func uploadDataUser(_ imgName: String, value: [String: Any?]) -> Observable<Bool> {
+        return Observable.deferred({ () -> Observable<Bool> in
+            return Observable.create({ (observer) -> Disposable in
+                FirebaseRef.refUserPost.child((Auth.auth().currentUser?.uid)!).child(imgName).setValue(value, withCompletionBlock: { (error, data) in
+                    if let error = error {
+                        observer.onError(error)
+                    } else {
+                        observer.onNext(true)
+                        observer.onCompleted()
+                    }
                 })
                 return Disposables.create()
             })

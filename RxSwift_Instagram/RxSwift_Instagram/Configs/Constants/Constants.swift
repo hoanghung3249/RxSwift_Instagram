@@ -14,6 +14,7 @@ import FirebaseDatabase
 enum ErrorResponse: Error {
     case noData
     case canNotGetUser
+    case cannotGetImage
 }
 
 struct Storyboard {
@@ -25,10 +26,14 @@ struct FirebaseRef {
     
     static let ref              = Database.database().reference()
     static let refUser          = Database.database().reference().child(DBSTableName.user)
+    static let refPost          = Database.database().reference().child(DBSTableName.post)
+    static let refUserPost      = Database.database().reference(withPath: DBSTableName.userPost)
     static let storage          = Storage.storage().reference(forURL: "gs://instagram-53aeb.appspot.com")
     
 }
 
 struct DBSTableName {
     static let user             = "User"
+    static let post             = "Post"
+    static let userPost         = "UserPost"
 }

@@ -15,9 +15,15 @@ class BaseViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     let choosePhotoVariable = BehaviorRelay<UIImage?>(value: nil)
+//    var baseViewModel: BaseViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        baseViewModel = BaseViewModel()
     }
     
     deinit {
