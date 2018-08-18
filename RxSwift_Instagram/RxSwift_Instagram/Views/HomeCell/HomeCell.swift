@@ -25,23 +25,34 @@ class HomeCell: UITableViewCell {
     var post: Post! {
         didSet {
             guard let p = post else { return }
+            
             lblName.text = p.userName
             if let urlStatus = URL(string: p.urlStatus) {
                 imgStatus.kf.setImage(with: urlStatus)
             }
+            if let urlAvatar = URL(string: p.avatarUrl) {
+                imgAvatar.kf.setImage(with: urlAvatar)
+            }
             lblStatus.text = p.status
+            lblNumberLikes.text = p.likeCount == nil || p.likeCount == 0 ? "Be the first to Like this" : "\(p.likeCount!)"
+            
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func setupUI() {
+        imgAvatar.layer.cornerRadius = imgAvatar.frame.size.height / 2
+        imgAvatar.clipsToBounds = true
     }
     
 }

@@ -99,6 +99,7 @@ class CameraViewController: BaseViewController {
     private func reloadUI() {
         imgStatus.image = #imageLiteral(resourceName: "placeholder")
         txvStatus.text = "What are you thinking?"
+        txvStatus.textColor = .gray
     }
 
 }

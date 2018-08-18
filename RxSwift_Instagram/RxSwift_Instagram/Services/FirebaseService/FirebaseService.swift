@@ -217,8 +217,8 @@ struct FirebaseService: FirebaseMethod {
         return Observable.deferred({ () -> Observable<[Post]> in
             return Observable.create({ (observer) -> Disposable in
                 FirebaseRef.refPost.observe(.childAdded, with: { (snapshot) in
+                    var posts = [Post]()
                     if let value = snapshot.value as? [String: Any] {
-                        var posts = [Post]()
                         var post = Post(JSON: value)
                         post?.id = snapshot.key
                         let isLiked = post?.likes[(Auth.auth().currentUser?.uid)!] != nil
@@ -226,7 +226,7 @@ struct FirebaseService: FirebaseMethod {
                         
                         posts.append(post!)
                         observer.onNext(posts)
-                        observer.onCompleted()
+//                        observer.onCompleted()
                     }
                 }, withCancel: { (error) in
                     observer.onError(error)

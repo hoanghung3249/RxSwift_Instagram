@@ -19,6 +19,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNav()
         setupTableView()
         bindData()
     }
@@ -26,11 +27,15 @@ class HomeViewController: BaseViewController {
     private func setupTableView() {
         let nib = UINib(nibName: "HomeCell", bundle: nil)
         tbvPost.register(nib, forCellReuseIdentifier: "HomeCell")
+        tbvPost.separatorStyle = .none
+    }
+    
+    private func setupNav() {
+        self.navigationController?.navigationBar.titleTextAttributes = [.font: Font.Billabong(30)]
+        self.navigationItem.title = "Instagram"
     }
     
     private func bindData() {
-        unowned let strongSelf = self
-        
         homeViewModel.post
             .asDriver()
             .drive(tbvPost.rx.items(cellIdentifier: "HomeCell", cellType: HomeCell.self)) { (_, post, cell) in

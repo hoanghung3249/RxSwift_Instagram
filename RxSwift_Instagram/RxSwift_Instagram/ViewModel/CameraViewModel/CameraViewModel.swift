@@ -21,7 +21,7 @@ class CameraViewModel {
     }
     let disposeBag = DisposeBag()
     
-    var userModel: Variable<UserModel>?
+    var userModel: Variable<UserModel?> = Variable<UserModel?>(nil)
     
     init() {
         getUserData()
@@ -42,9 +42,9 @@ class CameraViewModel {
                 let data: [String: Any?] = [
                     "url": url,
                     "uid": Auth.auth().currentUser?.uid,
-                    "userName": strongSelf.userModel?.value.userName,
+                    "userName": strongSelf.userModel.value?.userName,
                     "status": status,
-                    "urlAvatar": strongSelf.userModel?.value.avatarUrl
+                    "urlAvatar": strongSelf.userModel.value?.avatarUrl
                 ]
                 return FirebaseService.shared.uploadData(tableName: DBSTableName.post, child: nil, value: data)
             }
@@ -61,11 +61,10 @@ class CameraViewModel {
 extension CameraViewModel: UserData {
     
     func getUserData() {
-        FirebaseService.shared.getDataUser().asObservable()
-            .subscribe(onNext: { [weak self] (user) in
-                guard let strongSelf = self, let user = user else { return }
-                strongSelf.userModel?.value = user
-            }).disposed(by: disposeBag)
+        FirebaseService.shared.getDataUser()
+            .asObservable()
+            .bind(to: userModel)
+            .disposed(by: disposeBag)
     }
     
 }
