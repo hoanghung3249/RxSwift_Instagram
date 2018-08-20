@@ -22,6 +22,7 @@ protocol FirebaseMethod {
     func uploadData(tableName: String, child: String?, value: [String: Any?]) -> Observable<Bool>
     func uploadDataUser(_ imgName: String, value: [String: Any?]) -> Observable<Bool>
     func getListPost() -> Observable<[Post]>
+    func handleLike(_ ref: DatabaseReference) -> Observable<Post>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -227,6 +228,8 @@ struct FirebaseService: FirebaseMethod {
                         posts.append(post!)
                         observer.onNext(posts)
 //                        observer.onCompleted()
+                    } else {
+                        observer.onError(ErrorResponse.noData)
                     }
                 }, withCancel: { (error) in
                     observer.onError(error)
@@ -234,5 +237,57 @@ struct FirebaseService: FirebaseMethod {
                 return Disposables.create()
             })
         })
+    }
+    
+    func handleLike(_ ref: DatabaseReference) -> Observable<Post> {
+        return Observable.deferred { () -> Observable<Post> in
+            return Observable.create({ (observer) -> Disposable in
+                ref.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+                    if var post = currentData.value as? [String: Any], let uid = Auth.auth().currentUser?.uid {
+                        var likes: [String: Bool]
+                        likes = post["likes"] as? [String : Bool] ?? [:]
+                        var likeCount = post["likeCount"] as? Int ?? 0
+                        if let _ = likes[uid] {
+                            // Unlike the post and remove self from stars
+                            likeCount -= 1
+                            likes.removeValue(forKey: uid)
+                        } else {
+                            // Like the post and add self to stars
+                            likeCount += 1
+                            likes[uid] = true
+                        }
+                        post["likeCount"] = likeCount as AnyObject?
+                        post["likes"] = likes as AnyObject?
+                        
+                        // Set value and report transaction success
+                        currentData.value = post
+                        
+                        return TransactionResult.success(withValue: currentData)
+                    }
+                    return TransactionResult.success(withValue: currentData)
+                }, andCompletionBlock: { (error, committed, snapshot) in
+                    if let error = error {
+                        observer.onError(error)
+                    }
+                    
+                    if let dic = snapshot?.value as? [String: Any] {
+                        var post = Post(JSON: dic)
+                        post?.id = (snapshot?.key)!
+                        
+                        if let currentUserId = Auth.auth().currentUser?.uid {
+                            if post?.likes != nil {
+                                let isLiked = post?.likes[currentUserId] != nil
+                                post?.isLiked = isLiked
+                            }
+                        }
+                        observer.onNext(post!)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(ErrorResponse.noData)
+                    }
+                })
+                return Disposables.create()
+            })
+        }
     }
 }

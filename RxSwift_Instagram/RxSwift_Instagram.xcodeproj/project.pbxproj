@@ -36,6 +36,7 @@
 		455FCFED2111F1E300768B3F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FCFEC2111F1E300768B3F /* Parser.swift */; };
 		455FCFEF2111F26000768B3F /* HandleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FCFEE2111F26000768B3F /* HandleUserData.swift */; };
 		45BE3492211DD3270038F53C /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE3491211DD3270038F53C /* BaseViewModel.swift */; };
+		45D1BC08212AF28F00609A17 /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1BC07212AF28F00609A17 /* HomeCellViewModel.swift */; };
 		45F264C02115483700CA92B3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F264BF2115483700CA92B3 /* HomeViewController.swift */; };
 		45F264C22115487F00CA92B3 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F264C12115487F00CA92B3 /* CameraViewController.swift */; };
 		45F264C42115498F00CA92B3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F264C32115498F00CA92B3 /* SearchViewController.swift */; };
@@ -79,6 +80,7 @@
 		455FCFEC2111F1E300768B3F /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		455FCFEE2111F26000768B3F /* HandleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleUserData.swift; sourceTree = "<group>"; };
 		45BE3491211DD3270038F53C /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		45D1BC07212AF28F00609A17 /* HomeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModel.swift; sourceTree = "<group>"; };
 		45F264BF2115483700CA92B3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		45F264C12115487F00CA92B3 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		45F264C32115498F00CA92B3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				45198A6721245DC500F3DB58 /* HomeViewModel.swift */,
+				45D1BC07212AF28F00609A17 /* HomeCellViewModel.swift */,
 			);
 			path = HomeViewModel;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				4531A4DD210C0E8800D2E9A0 /* TransitionManager.swift in Sources */,
 				455FCFEF2111F26000768B3F /* HandleUserData.swift in Sources */,
 				45448E8D210B4C9B0011DED0 /* AppDelegate.swift in Sources */,
+				45D1BC08212AF28F00609A17 /* HomeCellViewModel.swift in Sources */,
 				455FCFED2111F1E300768B3F /* Parser.swift in Sources */,
 				45448EA3210B50BF0011DED0 /* BaseViewController.swift in Sources */,
 			);

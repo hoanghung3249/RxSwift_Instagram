@@ -39,7 +39,8 @@ class HomeViewController: BaseViewController {
         homeViewModel.post
             .asDriver()
             .drive(tbvPost.rx.items(cellIdentifier: "HomeCell", cellType: HomeCell.self)) { (_, post, cell) in
-                cell.post = post
+//                cell.post = post
+                cell.viewModel.post.value = post
             }.disposed(by: disposeBag)
         
     }

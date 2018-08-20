@@ -22,6 +22,9 @@ class HomeCell: UITableViewCell {
     @IBOutlet weak var lblNumberLikes: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
     
+    let disposeBag = DisposeBag()
+    var viewModel = HomeCellViewModel()
+    
     var post: Post! {
         didSet {
             guard let p = post else { return }
@@ -42,6 +45,7 @@ class HomeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
+        bindData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,6 +57,57 @@ class HomeCell: UITableViewCell {
     private func setupUI() {
         imgAvatar.layer.cornerRadius = imgAvatar.frame.size.height / 2
         imgAvatar.clipsToBounds = true
+    }
+    
+    private func updateUI(_ p: Post) {
+        
+    }
+    
+    private func bindData() {
+        unowned let strongSelf = self
+        
+        viewModel.post.asDriver()
+            .drive(onNext: { (p) in
+                guard let p = p else { return }
+                
+                strongSelf.lblName.text = p.userName
+                if let urlStatus = URL(string: p.urlStatus) {
+                    strongSelf.imgStatus.kf.setImage(with: urlStatus)
+                }
+                if let urlAvatar = URL(string: p.avatarUrl) {
+                    strongSelf.imgAvatar.kf.setImage(with: urlAvatar)
+                }
+                strongSelf.lblStatus.text = p.status
+                
+                let imageName = !p.isLiked ? "like" : "likeSelected"
+                strongSelf.btnLike.setImage(UIImage(named:imageName), for: .normal)
+                
+                // display a message for Likes
+                guard let count = p.likeCount else {
+                    return
+                }
+                
+                if count != 0 {
+                    var countString = ""
+                    if count == 1 {
+                        countString = "\(count) Like"
+                    } else {
+                        countString = "\(count) Likes"
+                    }
+                    strongSelf.lblNumberLikes.text = countString
+                } else if p.likeCount == 0 {
+                    strongSelf.lblNumberLikes.text = "Be the first to Like this"
+                }
+                
+            }).disposed(by: disposeBag)
+        
+        btnLike.rx.tap.asObservable().debounce(0.2, scheduler: MainScheduler.instance)
+            .flatMapLatest({ _ in FirebaseService.shared.handleLike(FirebaseRef.refPost.child((strongSelf.viewModel.post.value?.id)!))})
+            .subscribe(onNext: { (p) in
+                strongSelf.viewModel.post.value = p
+            }, onError: { (error) in
+                print(error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
     
 }
