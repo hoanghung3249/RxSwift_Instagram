@@ -23,6 +23,7 @@ protocol FirebaseMethod {
     func uploadDataUser(_ imgName: String, value: [String: Any?]) -> Observable<Bool>
     func getListPost() -> Observable<[Post]>
     func handleLike(_ ref: DatabaseReference) -> Observable<Post>
+    func dataChange(_ ref: DatabaseReference) -> Observable<Post>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -289,5 +290,23 @@ struct FirebaseService: FirebaseMethod {
                 return Disposables.create()
             })
         }
+    }
+    
+    func dataChange(_ ref: DatabaseReference) -> Observable<Post> {
+        return Observable.deferred({ () -> Observable<Post> in
+            return Observable.create({ (observer) -> Disposable in
+                FirebaseRef.refPost.observe(.childChanged, with: { (snapshot) in
+                    if let value = snapshot.value as? [String: Any] {
+                        var postUpdated = Post(JSON: value)
+                        postUpdated?.id = snapshot.key
+                        observer.onNext(postUpdated!)
+                        observer.onCompleted()
+                    }
+                }, withCancel: { (error) in
+                    observer.onError(error)
+                })
+                return Disposables.create()
+            })
+        })
     }
 }

@@ -46,7 +46,7 @@ PODS:
   - NVActivityIndicatorView (4.2.1):
     - NVActivityIndicatorView/Presenter (= 4.2.1)
   - NVActivityIndicatorView/Presenter (4.2.1)
-  - ObjectMapper (3.0.0)
+  - ObjectMapper (3.3.0)
   - Pastel (0.4.0)
   - PryntTrimmerView (2.0.1)
   - RxCocoa (4.2.0):
@@ -68,7 +68,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher (= 4.8)
   - NVActivityIndicatorView
-  - ObjectMapper (~> 3.0.0)
+  - ObjectMapper (~> 3.3.0)
   - Pastel
   - RxCocoa (~> 4.0)
   - RxGesture
@@ -115,7 +115,7 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: 8068ba3ad39cb44cbaab25d89ff2546b3f092681
-  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Pastel: 7fa5e26123b3dbe11f7ed255654bf37100b199a5
   PryntTrimmerView: 4260ae497a2f3e1bbfc0b71247eb74ab92bf0490
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
@@ -124,6 +124,6 @@ SPEC CHECKSUMS:
   SteviaLayout: 0d2112caea45707695e8c718262c8ea3dd37ef17
   YPImagePicker: b711992e87904056112795c3bc17af87e2585b71
 
-PODFILE CHECKSUM: 9dd82936443fb481e1375fb9e770eaa71dfa4323
+PODFILE CHECKSUM: eae282cc3015fa0c150e39f1f1b3ac30d99a497a
 
 COCOAPODS: 1.5.3

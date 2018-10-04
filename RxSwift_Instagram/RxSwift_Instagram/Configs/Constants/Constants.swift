@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 enum ErrorResponse: Error {
     case noData
+    case canNotUpdateData
     case canNotGetUser
     case cannotGetImage
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Firebase
 
 class HomeCellViewModel {
     
@@ -15,6 +16,10 @@ class HomeCellViewModel {
     
     init() {
         
+    }
+    
+    func handleLike(_ ref: DatabaseReference) -> Observable<Post> {
+        return FirebaseService.shared.handleLike(ref)
     }
     
 }
