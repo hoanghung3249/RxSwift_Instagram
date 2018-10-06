@@ -52,13 +52,6 @@ class HomeViewController: BaseViewController {
                 cell.setupUI(post)
                 cell.delegate = strongSelf
             }.disposed(by: disposeBag)
-        
-//        homeViewModel.posts.asObservable()
-//            .debounce(0.1, scheduler: MainScheduler.instance)
-//            .subscribe(onNext: { (posts) in
-//                strongSelf.tbvPost.reloadData()
-//            }).disposed(by: disposeBag)
-        
     }
 
 }
