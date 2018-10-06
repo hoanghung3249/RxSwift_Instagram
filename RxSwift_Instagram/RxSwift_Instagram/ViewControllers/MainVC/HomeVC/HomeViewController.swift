@@ -49,7 +49,7 @@ class HomeViewController: BaseViewController {
         homeViewModel.posts
             .asDriver()
             .drive(tbvPost.rx.items(cellIdentifier: "HomeCell", cellType: HomeCell.self)) { (_, post, cell) in
-                cell.setupUI(post)
+                cell.p = post
                 cell.delegate = strongSelf
             }.disposed(by: disposeBag)
     }
