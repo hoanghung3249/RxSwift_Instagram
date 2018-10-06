@@ -11,6 +11,10 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
+protocol HomeCellDelegate: class {
+    func updatePost(_ p: Post)
+}
+
 class HomeCell: UITableViewCell {
 
     @IBOutlet weak var imgAvatar: UIImageView!
@@ -24,6 +28,8 @@ class HomeCell: UITableViewCell {
     
     let disposeBag = DisposeBag()
     var viewModel = HomeCellViewModel()
+    var idPost = ""
+    weak var delegate: HomeCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,18 +71,19 @@ class HomeCell: UITableViewCell {
         
         btnLike.rx.tap.asObservable().debounce(0.2, scheduler: MainScheduler.instance)
             .flatMapLatest({ _ in
-                strongSelf.viewModel.handleLike(FirebaseRef.refPost.child((strongSelf.viewModel.post.value?.id)!))
+                strongSelf.viewModel.handleLike(FirebaseRef.refPost.child(strongSelf.idPost))
             })
             .subscribe(onNext: { (p) in
 //                strongSelf.viewModel.post.value = p
-                print(p)
+                strongSelf.delegate?.updatePost(p)
             }, onError: { (error) in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
     }
     
     func setupUI(_ p: Post) {
-        viewModel.post.value = p
+//        viewModel.post.value = p
+        idPost = p.id
         lblName.text = p.userName
         if let urlStatus = URL(string: p.urlStatus) {
             imgStatus.kf.setImage(with: urlStatus)
