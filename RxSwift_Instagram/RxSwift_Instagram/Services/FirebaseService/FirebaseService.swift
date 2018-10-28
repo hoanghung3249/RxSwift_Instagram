@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Firebase
+import ObjectMapper
 
 protocol FirebaseMethod {
     func getDataUser() -> Observable<UserModel?>
@@ -24,6 +25,7 @@ protocol FirebaseMethod {
     func getListPost() -> Observable<[Post]>
     func handleLike(_ ref: DatabaseReference) -> Observable<Post>
     func dataChange(_ ref: DatabaseReference) -> Observable<Post>
+    func getListData<T: Mappable>(_ ref: DatabaseReference) -> Observable<T>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -220,13 +222,8 @@ struct FirebaseService: FirebaseMethod {
             return Observable.create({ (observer) -> Disposable in
                 FirebaseRef.refPost.observe(.childAdded, with: { (snapshot) in
                     var posts = [Post]()
-                    if let value = snapshot.value as? [String: Any] {
-                        var post = Post(JSON: value)
-                        post?.id = snapshot.key
-                        let isLiked = post?.likes[(Auth.auth().currentUser?.uid)!] != nil
-                        post?.isLiked = isLiked
-                        
-                        posts.append(post!)
+                    if let post = snapshot.getPostData() {
+                        posts.append(post)
                         observer.onNext(posts)
 //                        observer.onCompleted()
                     } else {
@@ -304,6 +301,19 @@ struct FirebaseService: FirebaseMethod {
                     }
                 }, withCancel: { (error) in
                     observer.onError(error)
+                })
+                return Disposables.create()
+            })
+        })
+    }
+    
+    func getListData<T>(_ ref: DatabaseReference) -> Observable<T> {
+        return Observable.deferred({ () -> Observable<T> in
+            return Observable.create({ (observer) -> Disposable in
+                ref.observe(.childAdded, with: { (snapshot) in
+                    
+                }, withCancel: { (error) in
+                    observer.onError(ErrorResponse.noData)
                 })
                 return Disposables.create()
             })

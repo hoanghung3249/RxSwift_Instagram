@@ -11,6 +11,7 @@
 		45198A62212456FE00F3DB58 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45198A60212456FE00F3DB58 /* HomeCell.xib */; };
 		45198A6521245C8300F3DB58 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45198A6421245C8300F3DB58 /* Post.swift */; };
 		45198A6821245DC500F3DB58 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45198A6721245DC500F3DB58 /* HomeViewModel.swift */; };
+		451BE4BF2185618700EA95C7 /* FirebaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451BE4BE2185618700EA95C7 /* FirebaseExtensions.swift */; };
 		4531A4D6210C096500D2E9A0 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */; };
 		4531A4DD210C0E8800D2E9A0 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */; };
 		4531A4E1210C0EFF00D2E9A0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */; };
@@ -53,6 +54,7 @@
 		45198A60212456FE00F3DB58 /* HomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		45198A6421245C8300F3DB58 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		45198A6721245DC500F3DB58 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		451BE4BE2185618700EA95C7 /* FirebaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseExtensions.swift; sourceTree = "<group>"; };
 		4531A4D5210C096500D2E9A0 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		4531A4DC210C0E8800D2E9A0 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		4531A4E0210C0EFF00D2E9A0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				45448EB4210B5B290011DED0 /* UIExtensions.swift */,
+				451BE4BE2185618700EA95C7 /* FirebaseExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				45BE3492211DD3270038F53C /* BaseViewModel.swift in Sources */,
 				45448EA8210B52360011DED0 /* TabBarViewController.swift in Sources */,
 				4531A4E4210C14CB00D2E9A0 /* Constants.swift in Sources */,
+				451BE4BF2185618700EA95C7 /* FirebaseExtensions.swift in Sources */,
 				4531A4E1210C0EFF00D2E9A0 /* RegisterViewController.swift in Sources */,
 				4531A4ED210C524400D2E9A0 /* FirebaseService.swift in Sources */,
 				45448EB5210B5B290011DED0 /* UIExtensions.swift in Sources */,
