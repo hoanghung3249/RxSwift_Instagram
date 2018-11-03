@@ -25,7 +25,7 @@ protocol FirebaseMethod {
     func getListPost() -> Observable<[Post]>
     func handleLike(_ ref: DatabaseReference) -> Observable<Post>
     func dataChange(_ ref: DatabaseReference) -> Observable<Post>
-    func getListData<T: Mappable>(_ ref: DatabaseReference) -> Observable<T>
+    func getListData(_ ref: DatabaseReference) -> Observable<DataSnapshot>
 }
 
 struct FirebaseService: FirebaseMethod {
@@ -307,13 +307,17 @@ struct FirebaseService: FirebaseMethod {
         })
     }
     
-    func getListData<T>(_ ref: DatabaseReference) -> Observable<T> {
-        return Observable.deferred({ () -> Observable<T> in
+    func getListData(_ ref: DatabaseReference) -> Observable<DataSnapshot> {
+        return Observable.deferred({ () -> Observable<DataSnapshot> in
             return Observable.create({ (observer) -> Disposable in
-                ref.observe(.childAdded, with: { (snapshot) in
-                    
+                FirebaseRef.refPost.observe(.childAdded, with: { (snapshot) in
+                    if let _ = snapshot.value as? [String: Any] {
+                        observer.onNext(snapshot)
+                    } else {
+                        observer.onError(ErrorResponse.noData)
+                    }
                 }, withCancel: { (error) in
-                    observer.onError(ErrorResponse.noData)
+                    observer.onError(error)
                 })
                 return Disposables.create()
             })

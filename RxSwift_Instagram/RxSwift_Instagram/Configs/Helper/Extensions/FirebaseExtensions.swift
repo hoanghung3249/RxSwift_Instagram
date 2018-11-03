@@ -22,14 +22,4 @@ extension DataSnapshot {
         }
         return nil
     }
-    
-    func getData<T: Mappable>() -> T? {
-        guard let value = value as? [String: Any] else { return nil }
-        var object = T(JSON: value)
-        if value.contains(where: {$0.key == "status"}) {
-            
-        }
-        
-        return object
-    }
 }

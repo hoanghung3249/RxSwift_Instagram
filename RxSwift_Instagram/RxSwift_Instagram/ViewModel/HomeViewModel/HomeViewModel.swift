@@ -20,11 +20,12 @@ class HomeViewModel {
     }
     
     private func getListPost() {
-        FirebaseService.shared.getListPost()
+        unowned let strongSelf = self        
+        FirebaseService.shared.getListData(FirebaseRef.refPost)
             .asObservable()
-            .subscribe(onNext: { [weak self] (arrPost) in
-                for p in arrPost {
-                    self?.posts.value.append(p)
+            .subscribe(onNext: { (snapshot) in
+                if let post = snapshot.getPostData() {
+                    strongSelf.posts.value.append(post)
                 }
             }).disposed(by: disposeBag)
     }
